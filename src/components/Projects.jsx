@@ -45,31 +45,31 @@ const projectsData = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 px-6 bg-black">
+    <section id="projects" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 bg-black">
       <div className="container mx-auto max-w-7xl">
-        <h2 className="font-['Bebas_Neue'] text-7xl text-center mb-16 text-white">
+        <h2 className="font-['Bebas_Neue'] text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center mb-8 sm:mb-12 md:mb-16 text-white">
           <span className="glitch-text">GREATEST HITS</span>
         </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {projectsData.map((project, index) => (
             <div
               key={index}
-              className={`group relative overflow-hidden bg-gradient-to-br from-zinc-900 to-black border-4 border-zinc-800 hover:border-red-600 transition-all duration-300 transform hover:scale-105 ${
+              className={`group relative overflow-hidden bg-gradient-to-br from-zinc-900 to-black border-2 sm:border-4 border-zinc-800 hover:border-red-600 transition-all duration-300 transform hover:scale-105 ${
                 index % 2 === 0 ? 'hover:-rotate-2' : 'hover:rotate-2'
               }`}
             >
-              <div className="p-8">
-                <div className="mb-6 text-6xl text-red-500">
+              <div className="p-5 sm:p-6 md:p-8">
+                <div className="mb-4 sm:mb-6 text-4xl sm:text-5xl md:text-6xl text-red-500">
                   <i className={`fas ${project.icon}`}></i>
                 </div>
-                <h3 className="font-['Oswald'] text-2xl mb-3 text-white group-hover:text-red-500 transition-colors">
+                <h3 className="font-['Oswald'] text-xl sm:text-2xl mb-2 sm:mb-3 text-white group-hover:text-red-500 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-3 text-sm">
+                <p className="text-gray-400 text-sm sm:text-base mb-3 sm:mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
                   {project.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="bg-red-900 px-3 py-1 rounded">
+                    <span key={tagIndex} className="bg-red-900 px-2 sm:px-3 py-1 rounded">
                       {tag}
                     </span>
                   ))}
