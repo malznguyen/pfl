@@ -21,6 +21,8 @@ function App() {
     // Create audio element
     const audio = new Audio('/audio.mp3');
     audio.loop = true;
+    // Set default volume to 50%
+    audio.volume = 0.5;
     setAudioElement(audio);
 
     return () => {
