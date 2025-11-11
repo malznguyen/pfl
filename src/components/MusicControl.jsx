@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const MusicControl = ({ isPlaying, onToggle }) => {
   return (
@@ -15,6 +15,11 @@ const MusicControl = ({ isPlaying, onToggle }) => {
       </button>
     </div>
   );
+};
+
+MusicControl.propTypes = {
+  isPlaying: PropTypes.bool.isRequired,
+  onToggle: PropTypes.func.isRequired,
 };
 
 export default MusicControl;

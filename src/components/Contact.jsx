@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Contact = () => {
   const composeEmail = () => {
     window.location.href =
