@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Skills = () => {
   const openingAct = [
     { name: 'Python', level: 5 },

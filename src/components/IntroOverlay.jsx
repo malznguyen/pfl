@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const IntroOverlay = ({ show, onEnter }) => {
   return (
@@ -30,6 +30,11 @@ const IntroOverlay = ({ show, onEnter }) => {
       </div>
     </div>
   );
+};
+
+IntroOverlay.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onEnter: PropTypes.func.isRequired,
 };
 
 export default IntroOverlay;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Navigation = () => {
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
