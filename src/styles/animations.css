@@ -1,0 +1,193 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+/* Custom Cursor */
+* {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="white" stroke="black" stroke-width="1" d="M16 0 L20 12 L32 12 L22 20 L26 32 L16 24 L6 32 L10 20 L0 12 L12 12 Z"/></svg>') 16 16, auto;
+}
+
+/* Fire Text Animation */
+@keyframes fireFlicker {
+  0%, 100% { 
+    text-shadow: 
+      0 0 30px rgba(255, 0, 0, 0.8),
+      0 0 60px rgba(255, 0, 0, 0.6),
+      0 0 90px rgba(255, 0, 0, 0.4),
+      0 0 120px rgba(255, 0, 0, 0.3),
+      0 0 150px rgba(255, 0, 0, 0.2);
+    transform: scale(1);
+  }
+  50% { 
+    text-shadow: 
+      0 0 40px rgba(255, 0, 0, 0.9),
+      0 0 70px rgba(255, 0, 0, 0.7),
+      0 0 100px rgba(255, 0, 0, 0.5),
+      0 0 130px rgba(255, 0, 0, 0.4),
+      0 0 160px rgba(255, 0, 0, 0.3);
+    transform: scale(1.02);
+  }
+}
+
+.fire-text {
+  animation: fireFlicker 2s infinite alternate;
+  filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.8));
+}
+
+/* Lightning bolt animation */
+@keyframes lightning {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.lightning.flash {
+  animation: lightning 0.2s;
+}
+
+/* Thunder Shake Animation */
+@keyframes thunderShake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.shake {
+  animation: thunderShake 0.5s;
+}
+
+/* Glitch Animation */
+@keyframes glitch {
+  0%, 100% {
+    text-shadow: 
+      0.05em 0 0 rgba(255, 0, 0, .75),
+      -0.05em -0.025em 0 rgba(0, 255, 0, .75),
+      0.025em 0.05em 0 rgba(0, 0, 255, .75);
+  }
+  14% {
+    text-shadow: 
+      0.05em 0 0 rgba(255, 0, 0, .75),
+      -0.05em -0.025em 0 rgba(0, 255, 0, .75),
+      0.025em 0.05em 0 rgba(0, 0, 255, .75);
+  }
+  15% {
+    text-shadow: 
+      -0.05em -0.025em 0 rgba(255, 0, 0, .75),
+      0.025em 0.025em 0 rgba(0, 255, 0, .75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, .75);
+  }
+  49% {
+    text-shadow: 
+      -0.05em -0.025em 0 rgba(255, 0, 0, .75),
+      0.025em 0.025em 0 rgba(0, 255, 0, .75),
+      -0.05em -0.05em 0 rgba(0, 0, 255, .75);
+  }
+  50% {
+    text-shadow: 
+      0.025em 0.05em 0 rgba(255, 0, 0, .75),
+      0.05em 0 0 rgba(0, 255, 0, .75),
+      0 -0.05em 0 rgba(0, 0, 255, .75);
+  }
+  99% {
+    text-shadow: 
+      0.025em 0.05em 0 rgba(255, 0, 0, .75),
+      0.05em 0 0 rgba(0, 255, 0, .75),
+      0 -0.05em 0 rgba(0, 0, 255, .75);
+  }
+}
+
+.glitch-text {
+  animation: glitch 2.5s infinite;
+}
+
+/* Amplifier Knob Style */
+.knob {
+  background: radial-gradient(circle at 30% 30%, #444, #111);
+  border: 3px solid #333;
+  box-shadow: 
+    inset 0 2px 5px rgba(0,0,0,0.8),
+    0 2px 10px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+.knob::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 35%;
+  background: #ff0000;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+/* Guitar String Animation */
+@keyframes vibrate {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-1px); }
+  75% { transform: translateY(1px); }
+}
+
+.string {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #888, transparent);
+  animation: vibrate 0.1s infinite;
+  animation-play-state: paused;
+}
+
+.string:hover {
+  animation-play-state: running;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  box-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+/* Neon Text Effect */
+.neon {
+  text-shadow: 
+    0 0 10px #ff0000,
+    0 0 20px #ff0000,
+    0 0 30px #ff0000,
+    0 0 40px #ff0000;
+}
+
+/* Spotlight Animation */
+@keyframes spotlight {
+  0% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+.spotlight-animation {
+  animation: spotlight 4s infinite ease-in-out;
+  transform-origin: top center;
+}
+
+/* Rock Horns Cursor on Hover */
+.rock-hover:hover {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="28" font-size="28">🤘</text></svg>') 16 16, auto;
+}
+
+/* Vinyl Record Spinning */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl {
+  animation: spin 3s linear infinite;
+}
+
+/* Electric Text Animation */
+@keyframes electric {
+  0%, 100% {
+    filter: brightness(1) contrast(1);
+  }
+  50% {
+    filter: brightness(1.5) contrast(1.2);
+  }
+}
+
+/* Parallax Guitar Strings */
+@keyframes stringParallax {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100px); }
+}

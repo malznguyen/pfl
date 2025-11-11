@@ -1,35 +1,92 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import IntroOverlay from './components/IntroOverlay';
+import Navigation from './components/Navigation';
+import Hero from './components/Hero';
+import About from './components/About';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import Lightning from './components/Lightning';
+import Spotlights from './components/Spotlights';
+import MusicControl from './components/MusicControl';
+import './styles/animations.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showIntro, setShowIntro] = useState(true);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  const [audioElement, setAudioElement] = useState(null);
+
+  useEffect(() => {
+    // Create audio element
+    const audio = new Audio('/audio.mp3');
+    audio.loop = true;
+    setAudioElement(audio);
+
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.src = '';
+      }
+    };
+  }, []);
+
+  const handleEnterSite = () => {
+    setShowIntro(false);
+    
+    // Try to play audio
+    if (audioElement) {
+      audioElement.play()
+        .then(() => {
+          setIsMusicPlaying(true);
+        })
+        .catch((error) => {
+          console.log('Audio autoplay prevented:', error);
+          setIsMusicPlaying(false);
+        });
+    }
+
+    // Trigger thunder shake effect
+    setTimeout(() => {
+      document.body.style.animation = 'thunderShake 0.5s';
+      setTimeout(() => {
+        document.body.style.animation = '';
+      }, 500);
+    }, 1000);
+  };
+
+  const toggleMusic = () => {
+    if (audioElement) {
+      if (isMusicPlaying) {
+        audioElement.pause();
+        setIsMusicPlaying(false);
+      } else {
+        audioElement.play();
+        setIsMusicPlaying(true);
+      }
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="bg-black text-white font-['Inter'] overflow-x-hidden">
+      <IntroOverlay show={showIntro} onEnter={handleEnterSite} />
+      
+      {!showIntro && (
+        <>
+          <Lightning />
+          <Spotlights />
+          <MusicControl isPlaying={isMusicPlaying} onToggle={toggleMusic} />
+          <Navigation />
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Contact />
+          <Footer />
+        </>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
