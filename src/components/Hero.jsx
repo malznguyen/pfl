@@ -44,47 +44,48 @@ const Hero = () => {
         <div className="string" style={{ animationDelay: '0.25s' }}></div>
       </div>
 
-      <div className="relative z-10 text-center px-6">
+      <div className="relative z-10 text-center px-4 sm:px-6">
         {/* Main Title - Concert Poster Style */}
-        <div className="mb-8">
-          <h1 className="font-['Bebas_Neue'] text-8xl md:text-9xl lg:text-[12rem] leading-none">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="font-['Bebas_Neue'] text-6xl sm:text-8xl md:text-9xl lg:text-[12rem] leading-none">
             <span className="block text-red-600 neon glitch-text">AI ENGINEER</span>
-            <span className="block text-white text-6xl md:text-7xl mt-4">×</span>
-            <span className="block text-white text-6xl md:text-8xl mt-4 hover:text-red-500 transition-all">
+            <span className="block text-white text-4xl sm:text-6xl md:text-7xl mt-2 sm:mt-4">×</span>
+            <span className="block text-white text-4xl sm:text-6xl md:text-8xl mt-2 sm:mt-4 hover:text-red-500 transition-all">
               ROCK ENTHUSIAST
             </span>
           </h1>
         </div>
 
         {/* Subtitle */}
-        <p className="font-['Oswald'] text-xl md:text-2xl text-gray-400 mb-8 tracking-widest">
+        <p className="font-['Oswald'] text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-400 mb-6 sm:mb-8 tracking-wide sm:tracking-widest px-2">
           NEURAL NETWORKS BY DAY • POWER CHORDS BY NIGHT
         </p>
 
         {/* CTA Buttons as Amp Switches */}
-        <div className="flex justify-center space-x-6 flex-wrap gap-4">
+        <div className="flex justify-center flex-wrap gap-3 sm:gap-4 lg:gap-6">
           <button
             onClick={triggerLightning}
-            className="bg-red-600 hover:bg-red-700 px-8 py-4 font-['Oswald'] text-lg tracking-wider border-4 border-red-800 shadow-2xl transform hover:scale-110 transition-all hover:shadow-red-600/50 hover:shadow-2xl"
+            className="bg-red-600 hover:bg-red-700 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 font-['Oswald'] text-sm sm:text-base lg:text-lg tracking-wider border-2 sm:border-4 border-red-800 shadow-2xl transform hover:scale-110 transition-all hover:shadow-red-600/50 hover:shadow-2xl"
           >
-            <i className="fas fa-bolt mr-2"></i>
-            UNLEASH THE THUNDER
+            <i className="fas fa-bolt mr-1 sm:mr-2"></i>
+            <span className="hidden sm:inline">UNLEASH THE THUNDER</span>
+            <span className="inline sm:hidden">THUNDER</span>
           </button>
           <a
             href="#projects"
             onClick={(e) => scrollToSection(e, '#projects')}
-            className="bg-zinc-800 hover:bg-zinc-700 px-8 py-4 font-['Oswald'] text-lg tracking-wider border-4 border-zinc-900 shadow-2xl transform hover:scale-110 transition-all inline-block"
+            className="bg-zinc-800 hover:bg-zinc-700 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 font-['Oswald'] text-sm sm:text-base lg:text-lg tracking-wider border-2 sm:border-4 border-zinc-900 shadow-2xl transform hover:scale-110 transition-all inline-block"
           >
-            <i className="fas fa-guitar mr-2"></i>
+            <i className="fas fa-guitar mr-1 sm:mr-2"></i>
             SEE MY WORK
           </a>
         </div>
 
         {/* Vinyl Record Decoration */}
-        <div className="absolute -bottom-20 -right-20 w-40 h-40 opacity-20">
-          <div className="vinyl w-full h-full rounded-full bg-gradient-to-r from-zinc-900 to-zinc-700 border-8 border-zinc-800">
-            <div className="absolute inset-8 rounded-full bg-red-600"></div>
-            <div className="absolute inset-12 rounded-full bg-zinc-900"></div>
+        <div className="hidden sm:block absolute -bottom-20 -right-20 w-32 sm:w-40 h-32 sm:h-40 opacity-20">
+          <div className="vinyl w-full h-full rounded-full bg-gradient-to-r from-zinc-900 to-zinc-700 border-4 sm:border-8 border-zinc-800">
+            <div className="absolute inset-6 sm:inset-8 rounded-full bg-red-600"></div>
+            <div className="absolute inset-8 sm:inset-12 rounded-full bg-zinc-900"></div>
           </div>
         </div>
       </div>
