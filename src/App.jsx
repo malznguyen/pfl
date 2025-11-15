@@ -7,8 +7,6 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Lightning from './components/Lightning';
-import Spotlights from './components/Spotlights';
 import MusicControl from './components/MusicControl';
 import './styles/animations.css';
 
@@ -70,13 +68,14 @@ function App() {
   };
 
   return (
-    <div className="bg-black text-white font-['Inter'] overflow-x-hidden">
+    <div className="bg-cream text-ink font-serif overflow-x-hidden">
+      {/* Grain texture overlay */}
+      <div className="grain" />
+
       <IntroOverlay show={showIntro} onEnter={handleEnterSite} />
-      
+
       {!showIntro && (
         <>
-          <Lightning />
-          <Spotlights />
           <MusicControl isPlaying={isMusicPlaying} onToggle={toggleMusic} />
           <Navigation />
           <Hero />

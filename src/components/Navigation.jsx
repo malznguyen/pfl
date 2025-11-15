@@ -1,7 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
@@ -9,7 +18,7 @@ const Navigation = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+    setIsMobileMenuOpen(false);
   };
 
   const toggleMobileMenu = () => {
@@ -17,54 +26,55 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-900 border-b-4 border-red-600 shadow-2xl">
-      <div className="container mx-auto px-4 sm:px-6 py-4">
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-cream/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-6">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            {/* Logo as Amp Knob */}
-            <div className="knob w-10 h-10 sm:w-12 sm:h-12 rounded-full animate-pulse"></div>
-            <h1 className="font-['Bebas_Neue'] text-xl sm:text-2xl tracking-wider">
-              <span className="text-red-500">NGUYEN</span>{' '}
-              <span className="text-white">HA</span>
-            </h1>
-          </div>
+          {/* Logo */}
+          <a href="#" className="font-display text-xl tracking-wider text-ink">
+            <span className="font-extrabold">NH</span>
+            <span className="text-electric">.</span>
+          </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center gap-8">
             <a
               href="#about"
               onClick={(e) => scrollToSection(e, '#about')}
-              className="rock-hover hover:text-red-500 transition-all hover:scale-110 font-['Oswald'] tracking-wide text-sm lg:text-base"
+              className="font-mono text-xs tracking-[0.2em] text-ink/70 hover:text-electric transition-colors uppercase underline-expand"
             >
-              ABOUT
+              About
             </a>
             <a
               href="#projects"
               onClick={(e) => scrollToSection(e, '#projects')}
-              className="rock-hover hover:text-red-500 transition-all hover:scale-110 font-['Oswald'] tracking-wide text-sm lg:text-base"
+              className="font-mono text-xs tracking-[0.2em] text-ink/70 hover:text-electric transition-colors uppercase underline-expand"
             >
-              PROJECTS
+              Projects
             </a>
             <a
               href="#skills"
               onClick={(e) => scrollToSection(e, '#skills')}
-              className="rock-hover hover:text-red-500 transition-all hover:scale-110 font-['Oswald'] tracking-wide text-sm lg:text-base"
+              className="font-mono text-xs tracking-[0.2em] text-ink/70 hover:text-electric transition-colors uppercase underline-expand"
             >
-              SKILLS
+              Skills
             </a>
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, '#contact')}
-              className="rock-hover hover:text-red-500 transition-all hover:scale-110 font-['Oswald'] tracking-wide text-sm lg:text-base"
+              className="font-mono text-xs tracking-[0.2em] text-ink/70 hover:text-electric transition-colors uppercase underline-expand"
             >
-              CONTACT
+              Contact
             </a>
           </div>
 
           {/* Mobile Hamburger Button */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden text-white hover:text-red-500 transition-colors p-2"
+            className="md:hidden text-ink hover:text-electric transition-colors p-2"
             aria-label="Toggle menu"
           >
             <svg
@@ -87,38 +97,38 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
             isMobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="flex flex-col space-y-4 pt-4 pb-2">
+          <div className="flex flex-col gap-6 pt-8 pb-4">
             <a
               href="#about"
               onClick={(e) => scrollToSection(e, '#about')}
-              className="rock-hover hover:text-red-500 transition-all font-['Oswald'] tracking-wide text-center py-2 hover:bg-zinc-800 rounded"
+              className="font-mono text-xs tracking-[0.2em] text-ink/70 hover:text-electric transition-colors uppercase"
             >
-              ABOUT
+              About
             </a>
             <a
               href="#projects"
               onClick={(e) => scrollToSection(e, '#projects')}
-              className="rock-hover hover:text-red-500 transition-all font-['Oswald'] tracking-wide text-center py-2 hover:bg-zinc-800 rounded"
+              className="font-mono text-xs tracking-[0.2em] text-ink/70 hover:text-electric transition-colors uppercase"
             >
-              PROJECTS
+              Projects
             </a>
             <a
               href="#skills"
               onClick={(e) => scrollToSection(e, '#skills')}
-              className="rock-hover hover:text-red-500 transition-all font-['Oswald'] tracking-wide text-center py-2 hover:bg-zinc-800 rounded"
+              className="font-mono text-xs tracking-[0.2em] text-ink/70 hover:text-electric transition-colors uppercase"
             >
-              SKILLS
+              Skills
             </a>
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, '#contact')}
-              className="rock-hover hover:text-red-500 transition-all font-['Oswald'] tracking-wide text-center py-2 hover:bg-zinc-800 rounded"
+              className="font-mono text-xs tracking-[0.2em] text-ink/70 hover:text-electric transition-colors uppercase"
             >
-              CONTACT
+              Contact
             </a>
           </div>
         </div>

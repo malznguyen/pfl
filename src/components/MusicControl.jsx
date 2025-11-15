@@ -4,15 +4,24 @@ const MusicControl = ({ isPlaying, onToggle }) => {
   return (
     <div
       id="music-control"
-      className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-[9999]"
+      className="fixed bottom-6 right-6 z-[9999]"
     >
       <button
         onClick={onToggle}
-        className="bg-red-600 hover:bg-red-700 active:bg-red-800 text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-full font-['Oswald'] text-sm sm:text-base md:text-lg shadow-2xl transform hover:scale-110 active:scale-95 transition-all flex items-center min-h-[44px] min-w-[44px]"
+        className="group flex items-center gap-2 bg-ink text-cream px-4 py-3 font-mono text-xs tracking-wider hover:bg-electric transition-all duration-300"
         aria-label={isPlaying ? 'Pause music' : 'Play music'}
       >
-        <i className={`fas ${isPlaying ? 'fa-volume-up' : 'fa-play'} mr-1.5 sm:mr-2`}></i>
-        <span className="hidden xs:inline sm:inline">{isPlaying ? 'MUSIC ON' : 'PLAY MUSIC'}</span>
+        {isPlaying ? (
+          <>
+            <span className="w-2 h-2 bg-electric rounded-full animate-pulse group-hover:bg-cream" />
+            <span className="hidden sm:inline">SOUND ON</span>
+          </>
+        ) : (
+          <>
+            <span className="w-2 h-2 bg-cream/50 rounded-full group-hover:bg-cream" />
+            <span className="hidden sm:inline">SOUND OFF</span>
+          </>
+        )}
       </button>
     </div>
   );

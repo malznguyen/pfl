@@ -1,18 +1,17 @@
-const Hero = () => {
-  const triggerLightning = () => {
-    const lightning = document.getElementById('lightning');
-    if (lightning) {
-      lightning.classList.add('flash');
-      document.body.classList.add('shake');
-      document.body.style.filter = 'brightness(1.5)';
+import { useEffect, useRef } from 'react';
 
-      setTimeout(() => {
-        lightning.classList.remove('flash');
-        document.body.classList.remove('shake');
-        document.body.style.filter = 'brightness(1)';
-      }, 500);
-    }
-  };
+const Hero = () => {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    // Add animate class after mount for staggered reveal
+    const timer = setTimeout(() => {
+      if (heroRef.current) {
+        heroRef.current.classList.add('animate');
+      }
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
@@ -22,70 +21,94 @@ const Hero = () => {
     }
   };
 
-  const gridPattern = "data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='grid' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 60 0 L 0 0 0 60' fill='none' stroke='rgba(255,0,0,0.1)' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grid)' /%3E%3C/svg%3E";
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900 to-black">
-        <div
-          className="absolute inset-0 opacity-50"
-          style={{ backgroundImage: `url("${gridPattern}")` }}
-        ></div>
-      </div>
+    <section className="relative min-h-screen flex flex-col justify-between pt-24 pb-12 px-6 md:px-12 lg:px-20">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 dot-grid opacity-5" />
 
-      {/* Guitar Strings Background */}
-      <div className="absolute inset-0 flex flex-col justify-center space-y-20 opacity-20">
-        <div className="string"></div>
-        <div className="string" style={{ animationDelay: '0.05s' }}></div>
-        <div className="string" style={{ animationDelay: '0.1s' }}></div>
-        <div className="string" style={{ animationDelay: '0.15s' }}></div>
-        <div className="string" style={{ animationDelay: '0.2s' }}></div>
-        <div className="string" style={{ animationDelay: '0.25s' }}></div>
-      </div>
+      {/* Main Content */}
+      <div ref={heroRef} className="reveal-container relative z-10 flex-1 flex flex-col justify-center">
+        {/* Top Label */}
+        <div className="mb-8 md:mb-12">
+          <span className="font-mono text-xs md:text-sm tracking-[0.3em] text-muted uppercase">
+            Portfolio / 2024
+          </span>
+        </div>
 
-      <div className="relative z-10 text-center px-4 sm:px-6">
-        {/* Main Title - Concert Poster Style */}
-        <div className="mb-6 sm:mb-8">
-          <h1 className="font-['Bebas_Neue'] text-6xl sm:text-8xl md:text-9xl lg:text-[12rem] leading-none">
-            <span className="block text-red-600 neon glitch-text">AI ENGINEER</span>
-            <span className="block text-white text-4xl sm:text-6xl md:text-7xl mt-2 sm:mt-4">×</span>
-            <span className="block text-white text-4xl sm:text-6xl md:text-8xl mt-2 sm:mt-4 hover:text-red-500 transition-all">
-              ROCK ENTHUSIAST
-            </span>
+        {/* Main Typography Block */}
+        <div className="max-w-7xl">
+          <h1 className="font-display editorial-large text-ink mb-6">
+            <span className="block">NGUYEN</span>
+            <span className="block text-electric">HA</span>
           </h1>
+
+          <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-12">
+            <div className="md:max-w-md">
+              <p className="font-serif text-lg md:text-xl leading-relaxed text-ink/80">
+                AI Engineer crafting intelligent systems by day,
+                <span className="italic"> shredding power chords</span> by night.
+              </p>
+            </div>
+
+            <div className="flex-1">
+              <div className="h-px bg-ink/20 w-full" />
+            </div>
+
+            <div className="font-mono text-xs tracking-wider text-muted">
+              BASED IN VIETNAM
+            </div>
+          </div>
         </div>
 
-        {/* Subtitle */}
-        <p className="font-['Oswald'] text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-400 mb-6 sm:mb-8 tracking-wide sm:tracking-widest px-2">
-          NEURAL NETWORKS BY DAY • POWER CHORDS BY NIGHT
-        </p>
+        {/* Large Decorative Number */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none hidden lg:block">
+          <span className="font-display text-[20rem] leading-none text-ink/[0.02] font-extrabold">
+            01
+          </span>
+        </div>
+      </div>
 
-        {/* CTA Buttons as Amp Switches */}
-        <div className="flex justify-center flex-wrap gap-3 sm:gap-4 lg:gap-6">
-          <button
-            onClick={triggerLightning}
-            className="bg-red-600 hover:bg-red-700 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 font-['Oswald'] text-sm sm:text-base lg:text-lg tracking-wider border-2 sm:border-4 border-red-800 shadow-2xl transform hover:scale-110 transition-all hover:shadow-red-600/50 hover:shadow-2xl"
-          >
-            <i className="fas fa-bolt mr-1 sm:mr-2"></i>
-            <span className="hidden sm:inline">UNLEASH THE THUNDER</span>
-            <span className="inline sm:hidden">THUNDER</span>
-          </button>
-          <a
-            href="#projects"
-            onClick={(e) => scrollToSection(e, '#projects')}
-            className="bg-zinc-800 hover:bg-zinc-700 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 font-['Oswald'] text-sm sm:text-base lg:text-lg tracking-wider border-2 sm:border-4 border-zinc-900 shadow-2xl transform hover:scale-110 transition-all inline-block"
-          >
-            <i className="fas fa-guitar mr-1 sm:mr-2"></i>
-            SEE MY WORK
-          </a>
+      {/* Bottom Section */}
+      <div className="relative z-10 mt-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-8">
+          {/* Scroll Indicator */}
+          <div className="flex items-center gap-4">
+            <div className="w-px h-16 bg-ink/30" />
+            <span className="font-mono text-xs tracking-wider text-muted vertical-text">
+              SCROLL
+            </span>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              onClick={(e) => scrollToSection(e, '#projects')}
+              className="group inline-flex items-center gap-3 bg-ink text-cream px-8 py-4 font-display text-sm tracking-wider hover:bg-electric transition-colors duration-300"
+            >
+              VIEW WORK
+              <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+
+            <a
+              href="#contact"
+              onClick={(e) => scrollToSection(e, '#contact')}
+              className="inline-flex items-center gap-3 border-2 border-ink text-ink px-8 py-4 font-display text-sm tracking-wider hover:bg-ink hover:text-cream transition-all duration-300"
+            >
+              GET IN TOUCH
+            </a>
+          </div>
         </div>
 
-        {/* Vinyl Record Decoration */}
-        <div className="hidden sm:block absolute -bottom-20 -right-20 w-32 sm:w-40 h-32 sm:h-40 opacity-20">
-          <div className="vinyl w-full h-full rounded-full bg-gradient-to-r from-zinc-900 to-zinc-700 border-4 sm:border-8 border-zinc-800">
-            <div className="absolute inset-6 sm:inset-8 rounded-full bg-red-600"></div>
-            <div className="absolute inset-8 sm:inset-12 rounded-full bg-zinc-900"></div>
+        {/* Marquee */}
+        <div className="mt-16 overflow-hidden border-t border-b border-ink/10 py-4">
+          <div className="marquee whitespace-nowrap">
+            <span className="inline-block font-display text-2xl md:text-3xl tracking-wide text-ink/10">
+              ARTIFICIAL INTELLIGENCE • DEEP LEARNING • COMPUTER VISION • NLP • ROCK & ROLL • NEURAL NETWORKS • MACHINE LEARNING • AC/DC • PYTORCH • TENSORFLOW •
+              ARTIFICIAL INTELLIGENCE • DEEP LEARNING • COMPUTER VISION • NLP • ROCK & ROLL • NEURAL NETWORKS • MACHINE LEARNING • AC/DC • PYTORCH • TENSORFLOW •
+            </span>
           </div>
         </div>
       </div>
